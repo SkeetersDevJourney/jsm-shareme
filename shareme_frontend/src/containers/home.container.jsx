@@ -8,15 +8,14 @@ import { Sidebar, UserProfile } from '../components'
 import { client } from '../client'
 import logo from '../assets/logo.png'
 import { userQuery } from '../utils/data'
+import { fetchUser } from '../utils/fetchUser'
 
 const Home = () => {
   const [ user, setUser ] = useState( null )
   const [ toggleSidebar, setToggleSidebar ] = useState( false )
   const scrollRef = useRef( null )
 
-  const userInfo = localStorage.getItem('user') !== undefined 
-    ? JSON.parse(localStorage.getItem('user'))
-    : localStorage.clear();
+  const userInfo = fetchUser();
 
   useEffect(() => {
     const query = userQuery(userInfo?.aud)

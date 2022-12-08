@@ -189,7 +189,7 @@ const CreatePin = ({ user }) => {
                 onClick={savePin}
                 className='bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none'
               >
-                Save Pin
+                Post Pin
               </button>
             </div>
           </div>

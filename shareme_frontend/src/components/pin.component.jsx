@@ -13,7 +13,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const navigate = useNavigate()
 
   const user = fetchUser();
-  const alreadySaved = !!(save?.filter(item => item.postedBy._id === user.aud))?.length;
+  const alreadySaved = !!(save?.filter(item => item?.postedBy?._id === user?.aud))?.length;
 
   // 1, [2, 3, 1] -> [1].length -> 1 -> !1 -> false -> !false -> true
   // 4, [2, 3, 1] -> [].length -> 0 -> !0 -> true -> !true -> false
@@ -25,10 +25,10 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         .setIfMissing({ save: [] })
         .insert('after', 'save[-1]', [{
           _key: uuidv4(),
-          userId: user.aud,
+          userId: user?.aud,
           postedBy: {
             _type: 'postedBy',
-            _ref: user.aud
+            _ref: user?.aud
           }
         }])
         .commit()
@@ -108,7 +108,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 </a>
               }
 
-              { postedBy?._id === user.aud && (
+              { postedBy?._id === user?.aud && (
                 <button
                   type='button'
                   onClick={(e) => {
